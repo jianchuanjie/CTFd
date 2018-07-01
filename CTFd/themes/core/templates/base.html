@@ -68,16 +68,16 @@
 
 					{% if not get_config('workshop_mode') %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ request.script_root }}/teams">Teams</a>
+							<a class="nav-link" href="{{ request.script_root }}/teams">参赛队员</a>
 						</li>
 					{% endif %}
 					{% if not hide_scores() %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ request.script_root }}/scoreboard">Scoreboard</a>
+							<a class="nav-link" href="{{ request.script_root }}/scoreboard">排行榜</a>
 						</li>
 					{% endif %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ request.script_root }}/challenges">Challenges</a>
+						<a class="nav-link" href="{{ request.script_root }}/challenges">题目</a>
 					</li>
 				</ul>
 
@@ -91,25 +91,25 @@
 							</li>
 						{% endif %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ request.script_root }}/team">Team</a>
+							<a class="nav-link" href="{{ request.script_root }}/team">我的成绩</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ request.script_root }}/profile">Profile</a>
+							<a class="nav-link" href="{{ request.script_root }}/profile">个人资料</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ request.script_root }}/logout">Logout</a>
+							<a class="nav-link" href="{{ request.script_root }}/logout">注销</a>
 						</li>
 					{% else %}
 						{% if can_register() %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{ request.script_root }}/register">Register</a>
+								<a class="nav-link" href="{{ request.script_root }}/register">注册</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link d-none d-md-block d-lg-block">|</a>
 							</li>
 						{% endif %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{ request.script_root }}/login">Login</a>
+							<a class="nav-link" href="{{ request.script_root }}/login">登录</a>
 						</li>
 					{% endif %}
 				</ul>
