@@ -150,23 +150,26 @@ def register():
         emails = Teams.query.add_columns('email', 'id').filter_by(email=email).first()
         pass_short = len(password) == 0
         pass_long = len(password) > 128
-        valid_email = utils.check_email_format(request.form['email'])
+        # valid_email = utils.check_email_format(request.form['email'])
+        valid_id = utils.check_id_format(request.form['email'])
         team_name_email_check = utils.check_email_format(name)
 
-        if not valid_email:
-            errors.append("Please enter a valid email address")
+        # if not valid_email:
+        #     errors.append("Please enter a valid email address")
+        if not valid_id:
+            errors.append("Please enter a valid student id")
         if names:
-            errors.append('That team name is already taken')
+            errors.append('That  username is already taken')
         if team_name_email_check is True:
-            errors.append('Your team name cannot be an email address')
+            errors.append('Your username cannot be an email address')
         if emails:
-            errors.append('That email has already been used')
+            errors.append('That id has already been used')
         if pass_short:
             errors.append('Pick a longer password')
         if pass_long:
             errors.append('Pick a shorter password')
         if name_len:
-            errors.append('Pick a longer team name')
+            errors.append('Pick a longer username')
 
         if len(errors) > 0:
             return render_template('register.html', errors=errors, name=request.form['name'], email=request.form['email'], password=request.form['password'])

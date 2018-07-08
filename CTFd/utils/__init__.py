@@ -705,6 +705,10 @@ def check_email_format(email):
     return bool(re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email))
 
 
+def check_id_format(stu_id):
+    return bool(re.match(r"^\d{8}$", stu_id))
+
+
 def sha512(string):
     return hashlib.sha512(string).hexdigest()
 

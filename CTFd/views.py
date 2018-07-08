@@ -231,7 +231,8 @@ def profile():
                 name_len = len(request.form['name']) == 0
 
             emails = Teams.query.filter_by(email=email).first()
-            valid_email = utils.check_email_format(email)
+            # valid_email = utils.check_email_format(email)
+            valid_id = utils.check_id_format(email)
 
             if utils.check_email_format(name) is True:
                 errors.append('Team name cannot be an email address')
@@ -239,14 +240,16 @@ def profile():
             if ('password' in request.form.keys() and not len(request.form['password']) == 0) and \
                     (not bcrypt_sha256.verify(request.form.get('confirm').strip(), user.password)):
                 errors.append("Your old password doesn't match what we have.")
-            if not valid_email:
-                errors.append("That email doesn't look right")
+            # if not valid_email:
+            #     errors.append("That email doesn't look right")
+            if not valid_id:
+                errors.append("That student id dosen't look right")
             if not utils.get_config('prevent_name_change') and names and name != session['username']:
-                errors.append('That team name is already taken')
+                errors.append('That username is already taken')
             if emails and emails.id != session['id']:
                 errors.append('That email has already been used')
             if not utils.get_config('prevent_name_change') and name_len:
-                errors.append('Pick a longer team name')
+                errors.append('Pick a longer username')
             if website.strip() and not utils.validate_url(website):
                 errors.append("That doesn't look like a valid URL")
 
