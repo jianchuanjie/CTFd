@@ -140,10 +140,14 @@ def admin_team(teamid):
 
         errors = []
 
+        # if email:
+        #     valid_email = utils.check_email_format(email)
+        #     if not valid_email:
+        #         errors.append("That email address is invalid")
         if email:
-            valid_email = utils.check_email_format(email)
+            valid_email = utils.check_id_format(email)
             if not valid_email:
-                errors.append("That email address is invalid")
+                errors.append("That student id is invalid")
 
         name_used = Teams.query.filter(Teams.name == name).first()
         if name_used and int(name_used.id) != int(teamid):
@@ -154,7 +158,7 @@ def admin_team(teamid):
 
         email_used = Teams.query.filter(Teams.email == email).first()
         if email_used and int(email_used.id) != int(teamid):
-            errors.append('That email is taken')
+            errors.append('That student id is taken')
 
         if website and (website.startswith('http://') or website.startswith('https://')) is False:
             errors.append('Websites must start with http:// or https://')

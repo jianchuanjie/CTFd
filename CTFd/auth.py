@@ -221,7 +221,8 @@ def login():
         name = request.form['name']
 
         # Check if the user submitted an email address or a team name
-        if utils.check_email_format(name) is True:
+        # if utils.check_email_format(name) is True:
+        if utils.check_id_format(name) is True:
             team = Teams.query.filter_by(email=name).first()
         else:
             team = Teams.query.filter_by(name=name).first()

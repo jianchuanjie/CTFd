@@ -441,13 +441,19 @@ def get_ip(req=None):
         req = request
     trusted_proxies = app.config['TRUSTED_PROXIES']
     combined = "(" + ")|(".join(trusted_proxies) + ")"
-    route = req.access_route + [req.remote_addr]
-    for addr in reversed(route):
-        if not re.match(combined, addr):  # IP is not trusted but we trust the proxies
-            remote_addr = addr
-            break
-    else:
-        remote_addr = req.remote_addr
+    # route = req.access_route + [req.remote_addr]
+    route = req.access_route + list(map(lambda x:x.encode(), [req.headers['X-Real-IP']]))
+    print route
+    for ip in route:
+        if ip != route[0]:
+            return req.remote_addr
+    remote_addr = route[0]
+    # for addr in reversed(route):
+    #     if not re.match(combined, addr):  # IP is not trusted but we trust the proxies
+    #         remote_addr = addr
+    #         break
+    # else:
+    #     remote_addr = req.remote_addr
     return remote_addr
 
 
